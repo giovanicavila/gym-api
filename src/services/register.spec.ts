@@ -15,7 +15,7 @@ describe("register use case", () => {
       password: "123456",
     });
 
-    expect(user.id).toEqual(expect.any(Stri ng));
+    expect(user.id).toEqual(expect.any(String));
   });
 
   it("should hash user password when creating a new user", async () => {
@@ -47,7 +47,7 @@ describe("register use case", () => {
       password: "123456",
     });
 
-    expect(
+    await expect(
       registerUseCase.execute({
         name: "John Doe",
         email,

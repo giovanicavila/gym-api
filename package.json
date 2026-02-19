@@ -9,7 +9,8 @@
     "build": "tsup src --out-dir build --format esm",
     "prisma-studio": "prisma studio",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +20,7 @@
     "@biomejs/biome": "2.3.13",
     "@types/bcryptjs": "^2.4.6",
     "@types/node": "^25.1.0",
+    "@vitest/coverage-v8": "^4.0.18",
     "prisma": "^6.19.2",
     "tsup": "^8.5.1",
     "tsx": "^4.21.0",
