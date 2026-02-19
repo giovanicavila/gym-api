@@ -1,6 +1,7 @@
 import { hash } from "bcryptjs";
 import type { UsersRepository } from "@/repositories/users-repository.js";
 import { UsersAlreadyExistsError } from "./errors/users-already-exists-error.js";
+import type { User } from "@prisma/client";
 
 interface RegisterUseCaseRequest {
   name: string;
@@ -8,24 +9,28 @@ interface RegisterUseCaseRequest {
   password: string;
 }
 
+interface RegisterUseCaseResponse {
+  user: User;
+}
+
 export class RegisterUseCase {
   constructor(private usersRepository: UsersRepository) {}
 
-  async execute({ name, email, password }: RegisterUseCaseRequest) {
+  async execute({ name, email, password }: RegisterUseCaseRequest): Promise<RegisterUseCaseResponse> {
     const passwordHash = await hash(password, 6);
 
     const userWithSameEmail = await this.usersRepository.findByEmail(email);
 
     if (userWithSameEmail) {
       throw new UsersAlreadyExistsError();
-    } else {
-      // TODO: we should log to an external tool like DataDog, NewRelic, Sentry, etc.
     }
 
-    await this.usersRepository.create({
+    const user = await this.usersRepository.create({
       name,
       email,
       password_hash: passwordHash,
     });
+
+    return {user}
   }
 }
