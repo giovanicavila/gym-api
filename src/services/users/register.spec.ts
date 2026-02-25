@@ -1,7 +1,7 @@
 import { compare } from "bcryptjs";
 import { beforeEach, describe, expect, it } from "vitest";
 import { InMemoryUsersRepository } from "@/repositories/in-memory/in-memory-users-repository.js";
-import { UsersAlreadyExistsError } from "./errors/users-already-exists-error.js";
+import { UsersAlreadyExistsError } from "../errors/users-already-exists-error.js";
 import { RegisterUseCase } from "./register.js";
 
 let usersRepository: InMemoryUsersRepository;
@@ -44,7 +44,7 @@ describe("register use case", () => {
       name: "John Doe",
       email,
       password: "123456",
-    });   
+    });
 
     await expect(
       sut.execute({

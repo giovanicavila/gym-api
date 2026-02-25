@@ -1,7 +1,7 @@
 import type { FastifyReply, FastifyRequest } from "fastify";
 import z from "zod";
 import { PrismaUsersRepository } from "@/repositories/prisma/prisma-users-repository.js";
-import { GetUserProfileUseCase } from "@/services/get-user-profile.js";
+import { GetUserProfileUseCase } from "@/services/users/get-user-profile.js";
 
 export async function getUserById(
   request: FastifyRequest,
@@ -29,5 +29,4 @@ export async function getUserById(
   }
 
   return reply.status(500).send({ message: "Internal server error" });
-
 }
