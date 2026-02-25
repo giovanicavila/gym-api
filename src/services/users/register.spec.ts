@@ -34,6 +34,7 @@ describe("register use case", () => {
       "123456",
       user.password_hash,
     );
+    
     expect(isPasswordCorrectlyHashed).toBe(true);
   });
 
